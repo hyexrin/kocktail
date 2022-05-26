@@ -6,6 +6,12 @@ const app = express();
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
 
+// ejs-layout을 쓰겠다는 설정
+const layouts = require("express-ejs-layouts");
+app.use(layouts);
+app.set('layout', true); // views/layout.ejs를 기본 레이아웃으로 설정, <%- body %> 부분에 html 문자열
+app.set("layout extractScripts", true); // <%- script %> 부분에 script 문자열
+
 // 페이지 로딩 함수
 app.get("/", function(req, res){
     //console.log(res);
