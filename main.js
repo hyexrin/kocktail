@@ -6,11 +6,21 @@ const app = express();
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
 
-// ejs-layout을 쓰겠다는 설정
+// express-ejs-layouts 사용 설정
 const layouts = require("express-ejs-layouts");
 app.use(layouts);
-app.set('layout', true); // views/layout.ejs를 기본 레이아웃으로 설정, <%- body %> 부분에 html 문자열
+app.set('layout', './layout'); // views/layout.ejs를 기본 레이아웃으로 설정, <%- body %> 부분에 html 문자열
 app.set("layout extractScripts", true); // <%- script %> 부분에 script 문자열
+
+// mongoose 사용 설정
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/user_db",{ useNewUrlParser: true }); // 여기서 user_db를 써도되는게 맞는지 모르겠음...
+const db = mongoose.connection;
+
+db.once("open", () => {
+    console.log("Successfully connected to MongoDB using Mongoose!");
+});
+
 
 // 페이지 로딩 함수
 app.get("/", function(req, res){
