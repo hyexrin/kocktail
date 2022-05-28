@@ -14,6 +14,7 @@ app.set("layout extractScripts", true); // <%- script %> 부분에 script 문자
 
 // mongoose 사용 설정
 const mongoose = require("mongoose");
+const usersController = require("./controllers/usersController");
 mongoose.connect("mongodb://localhost:27017/user_db",{ useNewUrlParser: true }); // 여기서 user_db를 써도되는게 맞는지 모르겠음...
 const db = mongoose.connection;
 
@@ -35,6 +36,9 @@ app.get('/login', function(req, res){
 app.get('/join', function(req, res){
     res.render("join", {});
 });
+
+// 회원가입 시, DB 저장
+app.post('/joined', usersController.saveUser);
 
 // 서버 띄울때 포트 정보 셋팅 및 처음 실행 시 필요한 기능 수행 가능
 app.listen(3000, function(){
