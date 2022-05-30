@@ -1,6 +1,11 @@
-const mongoose = require("mongoose");
-const userSchema = new mongoose.Schema({
-    id : {
+"use strict";
+
+const mongoose = require("mongoose"),
+  { Schema } = require("mongoose");
+
+var userSchema = new Schema(
+  {
+    nick : {
         type : String,
         required : true,
         unique : true
@@ -14,17 +19,22 @@ const userSchema = new mongoose.Schema({
         required : true
     },
     phone : {
-        type : Number,
+        type : String,
         unique : true
     }
+  },
+  {
+    timestamps: true
+  }
+);
+
+userSchema.virtual("fullName").get(function() {
+  return `${this.name.first} ${this.name.last}`;
 });
 
-userSchema.methods.getInfo = () => {
-    return `ID : ${this.id} PW : ${this.pw} NAME : ${this.name} PHONE : ${this.phone}`;
-};
-
-userSchema.methods.findLocalUsers = () => {
-    return this.model("User").find({ pw : this.pw }).exec();
-};
+userSchema.pre("save", function(next) {
+  let user = this;
+    next();
+});
 
 module.exports = mongoose.model("User", userSchema);

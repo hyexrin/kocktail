@@ -1,48 +1,45 @@
-const express = require("express"); // express 모듈 셋팅
-const ejs = require("ejs"); // 페이지 로딩을 위해 필수
-const app = express();
+const express = require("express"),
+  layouts = require("express-ejs-layouts"),
+  app = express(),
+  router = express.Router(),
+  homeController = require("./controllers/homeController"),
+  usersController = require("./controllers/usersController.js"),
+  mongoose = require("mongoose"),
+  methodOverride = require("method-override");
 
-// view 엔진을 ejs를 쓰겠다는 설정
+mongoose.connect(
+  "mongodb://localhost:27017/kocktail",
+  { useNewUrlParser: true }
+);
+
+app.set("port", process.env.PORT || 3000);
 app.set("view engine", "ejs");
-app.engine("html", require("ejs").renderFile);
 
-// express-ejs-layouts 사용 설정
-const layouts = require("express-ejs-layouts");
-app.use(layouts);
-app.set('layout', './layout'); // views/layout.ejs를 기본 레이아웃으로 설정, <%- body %> 부분에 html 문자열
-app.set("layout extractScripts", true); // <%- script %> 부분에 script 문자열
+router.use(
+  methodOverride("_method", {
+    methods: ["POST", "GET"]
+  })
+);
 
-// mongoose 사용 설정
-const mongoose = require("mongoose");
-const usersController = require("./controllers/usersController");
-mongoose.connect("mongodb://localhost:27017/user_db",{ useNewUrlParser: true }); // 여기서 user_db를 써도되는게 맞는지 모르겠음...
-const db = mongoose.connection;
+router.use(layouts);
+router.use(express.static("public"));
 
-db.once("open", () => {
-    console.log("Successfully connected to MongoDB using Mongoose!");
+router.use(
+  express.urlencoded({
+    extended: false
+  })
+);
+router.use(express.json());
+
+router.get("/", homeController.index);
+
+router.get("/login", usersController.index, usersController.indexView);
+router.get("/join", usersController.new);
+router.get("/users", usersController.index, usersController.usersView);
+router.post("/joined", usersController.create, usersController.redirectView);
+
+app.use("/", router);
+
+app.listen(app.get("port"), () => {
+  console.log(`Server running at http://localhost:${app.get("port")}`);
 });
-
-
-// 페이지 로딩 함수
-app.get("/", function(req, res){
-    //console.log(res);
-    res.render("index", {}); // views 폴더 밑에 있는 파일을 참조함
-});
-
-app.get('/login', function(req, res){
-    res.render("login", {});
-});
-
-app.get('/join', function(req, res){
-    res.render("join", {});
-});
-
-// 회원가입 시, DB 저장
-app.post('/joined', usersController.saveUser);
-
-// 서버 띄울때 포트 정보 셋팅 및 처음 실행 시 필요한 기능 수행 가능
-app.listen(3000, function(){
-    console.log("server running");
-});
-
-app.use(express.static('public'));

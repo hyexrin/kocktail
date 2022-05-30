@@ -1,37 +1,58 @@
-const User = require("../models/user");
+"use strict";
+
+const User = require("../models/user"),
+  getUserParams = body => {
+    return {
+      nick : body.nick,
+      pw : body.pw,
+      name : body.name,
+      phone : body.phone
+    };
+  };
 
 module.exports = {
-    index : (req, res, next) => {
-        User.find({})
-            .then(users => {
-                res.locals.users = users;
-                next();
-            })
-            .catch(error => {
-                console.log(`Error fetching users : ${error.message}`);
-                next(error);
-            });
-    },
+  index: (req, res, next) => {
+    User.find()
+      .then(users => {
+        res.locals.users = users;
+        next();
+      })
+      .catch(error => {
+        console.log(`Error fetching users: ${error.message}`);
+        next(error);
+      });
+  },
+  indexView: (req, res) => {
+    res.render("login");
+  },
 
-    indexView : (req, res) => {
-        res.render("users/index");
-    },
+  new: (req, res) => {
+    res.render("join");
+  },
 
-    saveUser : (req, res) => {
-        let newUser = newUser({
-            id : req.body.id,
-            pw : req.body.pw,
-            name : req.body.name,
-            phone : req.body.phone
-        });
+  usersView : (req, res) => {
+    res.render("users");
+  },
 
-        newUser
-            .save()
-            .then(result => {
-                res.render("index");
-            })
-            .catch(error => {
-                if (error) res.send(error);
-            });
-    }
+  create: (req, res, next) => {
+    let userParams = getUserParams(req.body);
+
+    User.create(userParams)
+      .then(user => {
+        res.locals.redirect = "/users";
+        res.locals.user = user;
+        next();
+      })
+      .catch(error => {
+        console.log(`Error saving user: ${error.message}`);
+        next(error);
+      });
+  },
+
+  redirectView: (req, res, next) => {
+    let redirectPath = res.locals.redirect;
+    if (redirectPath !== undefined) res.redirect(redirectPath);
+    else next();
+  }
+
 };
