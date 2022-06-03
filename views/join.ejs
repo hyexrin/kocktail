@@ -1,16 +1,14 @@
-<div id = "join">
-    <h2>JOIN</h2>
-    <input id = "id" type = "text" placeholder="ID를 입력하세요">
-    <button>중복확인</button>
-    <input id = "pw" type = "password" placeholder="비밀번호를 입력하세요">
-    <input id = "pw-re" type = "password" placeholder="비밀번호를 다시 입력하세요">
-    <input id = "name" type = "text" placeholder="이름을 입력하세요">
-    <input id = "phone" type="text" placeholder="전화번호를 입력하세요">
-    <button>인증받기</button>
-    <input id = "certification" type="text" placeholder="인증번호를 입력하세요">
-    <button onclick = "location.href = './joined'">회원가입</button>
-  </div>
-  <div id = "others">
-    <img src="" alt="kakao">
-    <img scr="" alt="naver">
-  </div>
+<div class="data-form">
+  <form class="form-signin" action="joined" method="POST">
+    <h2 class="form-signin-heading">JOIN</h2>
+    <label for="inputNickName">Nick Name</label>
+    <input type="text" name="nick" id="inputNickName" class="form-control" placeholder="Nick Name" autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="pw" id="inputPassword" class="form-control" placeholder="Password" required>
+    <label for="inputName">Name</label>
+    <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" required>
+    <label for="inputPhoneNumber">Phone Number</label>
+    <input type="text" name="phone" id="inputPhoneNumber" class="form-control" placeholder="Phone Number" required>
+    <br /><button class="btn btn-lg btn-primary btn-block" type="submit">JOIN</button>
+  </form>
+</div>

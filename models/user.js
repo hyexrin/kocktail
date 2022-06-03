@@ -28,9 +28,6 @@ var userSchema = new Schema(
   }
 );
 
-userSchema.virtual("fullName").get(function() {
-  return `${this.name.first} ${this.name.last}`;
-});
 
 userSchema.pre("save", function(next) {
   let user = this;
