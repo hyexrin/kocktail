@@ -33,7 +33,7 @@ router.use(express.json());
 
 router.get("/", homeController.index);
 
-router.get("/login", usersController.index, usersController.login);
+router.get("/login", usersController.index, usersController.indexView);
 router.get("/join", usersController.new);
 router.get("/users", usersController.index, usersController.usersView);
 router.post("/joined", usersController.create, usersController.redirectView);
