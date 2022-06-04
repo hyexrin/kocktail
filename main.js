@@ -1,65 +1,81 @@
 const express = require("express"),
   layouts = require("express-ejs-layouts"),
   app = express(),
-  router = express.Router(),
-  homeController = require("./controllers/homeController"),
-  usersController = require("./controllers/usersController.js"),
-  productsController = require("./controllers/productsController.js"),
+  router = require("./routes/index");
   mongoose = require("mongoose"),
-  methodOverride = require("method-override");
+  methodOverride = require("method-override"),
+  passport = require('passport'),
+  cookieParser = require("cookie-parser"),
+  expressSession = require('express-session'),
+  connectFlash = require("connect-flash"),
+  User = require('./models/user');
 
-// login을 위한 passport 사용 설정
-const session = require('express-session');
-const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
-mongoose.connect(
-  "mongodb://localhost:27017/kocktail",
+mongoose.connect("mongodb://localhost:27017/kocktail",
   { useNewUrlParser: true }
 );
 
 app.set("port", process.env.PORT || 3000);
 app.set("view engine", "ejs");
 
-// login을 위한 passport 사용 설정
-app.use(session({secret : true, resave : true, saveUninitialized : false}));
-app.use(passport.initialize());
-app.use(passport.session());
-usersController();
-//passportConfig();
-
-router.use(
+app.use(
   methodOverride("_method", {
     methods: ["POST", "GET"]
   })
 );
 
-router.use(layouts);
-router.use(express.static("public"));
+app.use(layouts);
+app.use(express.static("public"));
 
-router.use(
+app.use(
   express.urlencoded({
     extended: false
   })
 );
-router.use(express.json());
-
-router.get("/", homeController.index);
-
-router.get("/login", usersController.index, usersController.login);
-router.get("/join", usersController.new);
-router.get("/users", usersController.index, usersController.usersView);
-router.post("/joined", usersController.create, usersController.redirectView);
+app.use(express.json());
 
 // login을 위한 passport 사용 설정
-router.post('/logined', passport.authenticate('local', {
-  failureRedirect : '/'
-}), (req, res) => {
-  res.redirect('/');
+app.use(cookieParser("kocktail"));
+app.use(
+  expressSession({
+    secret : "kocktail",
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+app.use(connectFlash());
+app.use(passport.initialize());
+app.use(passport.session());
+// passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+passport.use(new LocalStrategy ({
+  usernameField : 'nick',
+  passwordField : 'pw'
+}, (username, password, done) => {
+  User.findOne({ username : username}, (err, user) => {
+    if (err) { return done(err)}
+    if (!user) {
+      return done(null, false, {message : 'Incorrect username'});
+    }
+    if(!user.validPassword(password)) {
+      return done(null, false, {message : 'Incorrect password.'});
+    }
+    return done(null, user);
+  })
+}));
+
+
+app.use((req, res, next) => {
+//  res.locals.loggedIn = req.isAuthenticated();
+  res.locals.currentUser = req.user;
+  res.locals.flashMessages = req.flash();
+  next();
 });
 
-router.get("/products", productsController.index, productsController.productsView);
-router.get("/productsInsert", productsController.productsInsert);
-router.post("/inserted", productsController.create, productsController.redirectView);
 
 app.use("/", router);
 

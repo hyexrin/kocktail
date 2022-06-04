@@ -1,7 +1,6 @@
-"use strict";
-
 const mongoose = require("mongoose"),
-  { Schema } = require("mongoose");
+  { Schema } = require("mongoose"),
+  passportLocalMongoose = require("passport-local-mongoose");
 
 var userSchema = new Schema(
   {
@@ -28,10 +27,12 @@ var userSchema = new Schema(
   }
 );
 
+userSchema.methods.validPassword = (password) => {
+  return (this.pw == password);
+};
 
-userSchema.pre("save", function(next) {
-  let user = this;
-    next();
+userSchema.plugin(passportLocalMongoose, {
+  usernameField: "nick"
 });
 
 module.exports = mongoose.model("User", userSchema);
