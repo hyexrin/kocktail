@@ -1,0 +1,29 @@
+<h2 class="center">Products Table</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>CATEGORY</th>
+      <th>NAME</th>
+      <th>PRICE</th>
+      <th>IMG</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% products.forEach(products => { %>
+    <tr>
+      <td>
+          <%= products.category %>
+      </td>
+      <td>
+        <%= products.name %>
+      </td>
+      <td>
+        <%= products.price %>
+      </td>
+      <td>
+        <%= products.img %>
+      </td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
