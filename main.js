@@ -4,6 +4,7 @@ const express = require("express"),
   router = express.Router(),
   homeController = require("./controllers/homeController"),
   usersController = require("./controllers/usersController.js"),
+  productsController = require("./controllers/productsController.js"),
   mongoose = require("mongoose"),
   methodOverride = require("method-override");
 
@@ -37,6 +38,10 @@ router.get("/login", usersController.index, usersController.login);
 router.get("/join", usersController.new);
 router.get("/users", usersController.index, usersController.usersView);
 router.post("/joined", usersController.create, usersController.redirectView);
+
+router.get("/products", productsController.index, productsController.productsView);
+router.get("/productsInsert", productsController.productsInsert);
+router.post("/inserted", productsController.create, productsController.redirectView);
 
 app.use("/", router);
 

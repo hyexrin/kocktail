@@ -16,5 +16,14 @@
     "method-override": "^3.0.0",
     "mongoose": "^6.3.4"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyexrin/kocktail.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/hyexrin/kocktail/issues"
+  },
+  "homepage": "https://github.com/hyexrin/kocktail#readme"
 }
