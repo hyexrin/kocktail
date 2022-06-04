@@ -19,10 +19,12 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0"
   },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hyexrin/kocktail.git"
   },
+  "keywords": [],
   "bugs": {
     "url": "https://github.com/hyexrin/kocktail/issues"
   },

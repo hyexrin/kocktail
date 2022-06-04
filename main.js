@@ -4,6 +4,7 @@ const express = require("express"),
   router = express.Router(),
   homeController = require("./controllers/homeController"),
   usersController = require("./controllers/usersController.js"),
+  productsController = require("./controllers/productsController.js"),
   mongoose = require("mongoose"),
   methodOverride = require("method-override");
 
@@ -55,6 +56,10 @@ router.post('/logined', passport.authenticate('local', {
 }), (req, res) => {
   res.redirect('/');
 });
+
+router.get("/products", productsController.index, productsController.productsView);
+router.get("/productsInsert", productsController.productsInsert);
+router.post("/inserted", productsController.create, productsController.redirectView);
 
 app.use("/", router);
 
