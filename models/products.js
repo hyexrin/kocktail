@@ -37,9 +37,8 @@ var productsSchema = new Schema(
 );
 
 
-productsSchema.pre("save", function(next) {
-  let product = this;
-    next();
-});
+productsSchema.methods.getInfo = () => {
+  return `Code : ${this.code} Name : ${this.name}`;
+};
 
 module.exports = mongoose.model("Products", productsSchema);

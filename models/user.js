@@ -32,4 +32,8 @@ userSchema.plugin(passportLocalMongoose, {
   usernameField: "nick"
 });
 
+userSchema.methods.getInfo = () => {
+  return `NickName : ${this.nick} `;
+};
+
 module.exports = mongoose.model("User", userSchema);

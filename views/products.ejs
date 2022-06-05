@@ -23,6 +23,13 @@
       <td>
         <%= products.img %>
       </td>
+      <td>
+        <form action ='cartInsert' method="POST">
+        <input type="hidden" name="userNick" value='<%= currentUser.nick %>'>
+        <input type="hidden" name="productCode" value='<%= products.code %>'>
+        <button type="submit">장바구니에 담기</button>
+        </form>
+      </td>
     </tr>
     <% }); %>
   </tbody>
