@@ -4,7 +4,13 @@
       <li> <a href="#">ABOUT COCKTAILS</a> </li>
       <li> <a href="/"><img src="/img/logo.jpg" alt="로고" style="width: 10%; margin-top: 5px;"></a> </li>
       <li>SHOP</li>
-      <li> <a href="/login"> JOIN / LOGIN </a></li>
+      <% if (loggedIn) { %>
+        <li><a href="<%=`/users/${currentUser._id}`%>">
+        <%= currentUser.name %></a></li>
+        <li><a href="/logout"> LOGOUT </a></li>
+        <%} else {%>
+        <li> <a href="/login"> LOGIN </a></li>
+        <% } %>
     </ul>
       <div class="clear"></div>
 </header>
