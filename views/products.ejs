@@ -23,6 +23,8 @@
       <td>
         <%= products.img %>
       </td>
+
+      <%# DB에 cart Collenction 저장을 위한 코드 -> 장바구니 기능 %>
       <td>
         <form action ='cartInsert' method="POST">
         <input type="hidden" name="userId" value='<%= currentUser._id %>'>
