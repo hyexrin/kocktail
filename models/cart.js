@@ -1,11 +1,9 @@
 const mongoose = require("mongoose"),
-  { Schema } = require("mongoose"),
-  Products = require("./products"),
-  User = require("./user");
+  { Schema } = require("mongoose");
 
 var cartSchema = new Schema (
     {
-        userNick : {
+        userId : {
             type:String
         },
 

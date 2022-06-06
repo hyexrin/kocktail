@@ -1,7 +1,7 @@
 const Cart = require("../models/cart"),
 getCartParams = body => {
   return {
-    userNick : body.userNick,
+    userId : body.userId,
     productCode : body.productCode
   };
 };
@@ -18,7 +18,7 @@ module.exports = {
         next();
       })
       .catch(error => {
-        console.log(`Error saving products: ${error.message}`);
+        console.log(`Error saving products in the cart: ${error.message}`);
         next(error);
       });
   },
@@ -27,6 +27,21 @@ module.exports = {
     let redirectPath = res.locals.redirect;
     if (redirectPath !== undefined) res.redirect(redirectPath);
     else next();
-  }
+  },
+
+
+  cart: (req, res, next) => {
+    let userId = req.params.id;
+    Cart.find({userId : {$eq : userId }})
+      .then(carts => {
+       res.locals.carts = carts;
+       next();
+       console.log(carts);
+     })
+      .catch(error => {
+        console.log(`Error : ${error.message}`);
+        next(error);
+      });
+    }
 
 };

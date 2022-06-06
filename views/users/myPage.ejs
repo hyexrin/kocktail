@@ -16,22 +16,24 @@
 </table>
 
 <h2>장바구니 목록</h2>
-<% if(currentUser.nick == cart.userNick) { %>
+
 <table>
-    <tr>
-        <th>CATEGORY</th>
-    </tr>
-    <tr>
-        <th>CODE</th>
-        <td><%= cart.productCode %></td>
-    </tr>
-    <tr>
-        <th>NAME</th>
-        <td></td>
-    </tr>
-    <tr>
-        <th>PRICE</th>
-        <td></td>
-    </tr>
+    <thead>
+        <tr>
+            <th>CATEGORY</th>
+            <th>CODE</th>
+            <th>NAME</th>
+            <th>PRICE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% carts.forEach(carts => { %>
+        <tr>
+            <td></td>
+            <td><%= carts.productCode %></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <% }); %>
+    </tbody>
 </table>
-<% } %>

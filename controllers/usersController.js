@@ -1,5 +1,5 @@
 const User = require("../models/user"),
-  Cart = require("../models/cart"),
+  Cart = require("../controllers/cartController"),
   passport = require("passport"),
   getUserParams = body => {
     return {
@@ -54,7 +54,6 @@ const User = require("../models/user"),
   
     myPage: (req, res, next) => {
       let userId = req.params.id;
-      let userNick = req.params.nick;
       User.findById(userId)
         .then(user => {
           res.locals.user = user;
@@ -64,16 +63,12 @@ const User = require("../models/user"),
           console.log(`Error fetching user by ID: ${error.message}`);
           next(error);
         });
-      Cart.findByUserNick(userNick)
-        .then(cart => {
-          res.locals.cart = cart;
-          next();
-        })
     },
   
     myPageView: (req, res) => {
-      res.render("users/myPage");
+      res.render("users/myPage" );
     },
+
   
     edit: (req, res, next) => {
       let userId = req.params.id;
