@@ -7,8 +7,8 @@ const Products = require("../models/products"),
       code : body.code,
       name : body.name,
       price : body.price,
-      discription : body.discription,
-      img : body.img
+      discription : body.discription
+      // img : body.file
     };
   };
 
@@ -38,7 +38,8 @@ module.exports = {
 
   create: (req, res, next) => {
     let productsParams = getProductsParams(req.body);
-
+    productsParams.img = req.file.filename;
+    console.log(productsParams.img);
     Products.create(productsParams)
       .then(products => {
         res.locals.redirect = "/products";
@@ -50,6 +51,7 @@ module.exports = {
         next(error);
       });
   },
+
 
   redirectView: (req, res, next) => {
     let redirectPath = res.locals.redirect;

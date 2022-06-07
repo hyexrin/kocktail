@@ -30,6 +30,10 @@ var productsSchema = new Schema(
       type : String,
       data : Buffer
     }
+    // path : {
+    //   type : String,
+    //   unique : true
+    // }
   },
   {
     timestamps: true
@@ -37,8 +41,9 @@ var productsSchema = new Schema(
 );
 
 
-productsSchema.methods.getInfo = () => {
-  return `Code : ${this.code} Name : ${this.name}`;
-};
+productsSchema.pre("save", function(next) {
+  let product = this;
+    next();
+});
 
 module.exports = mongoose.model("Products", productsSchema);

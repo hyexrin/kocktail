@@ -1,5 +1,19 @@
+"use strict";
+
+const Products = require("../models/products");
+
 module.exports = {
   index: (req, res) => {
-    res.render("index");
+    Products.find().limit(4)
+      .then(products => {
+        res.locals.products = products;
+        res.render("index");
+        next();
+      })
+      .catch(error => {
+        console.log(`Error fetching products: ${error.message}`);
+        next(error);
+      });
+    
   }
 };

@@ -1,5 +1,5 @@
 <div class="data-form">
-  <form class="form-signin" action="inserted" method="POST">
+  <form class="form-signin" action="inserted" method="POST" enctype="multipart/form-data">
     <h2 class="form-signin-heading">Products Inserts</h2>
     <label for="inputCategory">CATEGORY</label>
     <input type="text" name="category" id="inputCategory" class="form-control" placeholder="Category" autofocus>
@@ -11,6 +11,10 @@
     <input type="text" name="price" id="inputPrice" class="form-control" placeholder="Price" required>
     <label for="inputDiscription">DISCRIPTION</label>
     <input type="text" name="discription" id="inputDiscription" class="form-control" placeholder="Discription" required>
+    <label for="inputImg">IMG</label>
+    <input type="file" name="file" id="inputImg" class="form-control" placeholder="Img" required>
     <br /><button class="btn btn-lg btn-primary btn-block" type="submit">INSERT</button>
   </form>
 </div>
+
+<a href="/products">products list</a>

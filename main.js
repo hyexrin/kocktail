@@ -10,6 +10,7 @@ const express = require("express"),
   expressSession = require("express-session"),
   expressValidator = require("express-validator"),
   connectFlash = require("connect-flash"),
+  fs = require("fs"),
   User = require("./models/user");
 
 mongoose.connect(
