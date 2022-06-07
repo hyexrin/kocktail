@@ -1,20 +1,21 @@
-const Cart = require("../models/cart"),
-getCartParams = body => {
+const Order = require("../models/order"),
+getOrderParams = body => {
   return {
     userId : body.userId,
-    productCode : body.productCode
+    productCode : body.productCode,
+    state : body.state
   };
 };
 
 
 module.exports = {
   create: (req, res, next) => {
-    let CartParams = getCartParams(req.body);
+    let OrderParams = getOrderParams(req.body);
 
-    Cart.create(CartParams)
-      .then(cart => {
+    Order.create(OrderParams)
+      .then(order => {
         res.locals.redirect = "/products";
-        res.locals.cart = cart;
+        res.locals.order = order;
         next();
       })
       .catch(error => {
@@ -30,11 +31,11 @@ module.exports = {
   },
 
 
-  cart: (req, res, next) => {
+  order: (req, res, next) => {
     let userId = req.params.id;
     Cart.find({userId : {$eq : userId }})
-      .then(carts => {
-       res.locals.carts = carts;
+      .then(order => {
+       res.locals.order = order;
        next();
      })
       .catch(error => {

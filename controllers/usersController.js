@@ -92,7 +92,7 @@ const User = require("../models/user"),
         $set: userParams
       })
         .then(user => {
-          res.locals.redirect = `/users/${userId}`;
+          res.locals.redirect = "/users";
           res.locals.user = user;
           next();
         })

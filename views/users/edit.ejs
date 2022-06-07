@@ -1,0 +1,14 @@
+<div class="data-form">
+    <form class="form-signin" method="POST" action="<%=`/users/${user._id}/update?_method=PUT`%>">
+        <h2 class="form-signin-heading">회원정보 수정</h2>
+        <label for="inputNickName">Nick Name</label>
+        <input type="text" name="nick" id="inputNickName" class="form-control" placeholder="Nick Name" value="<%= user.nick %>" autofocus>
+        <label for="inputPassword">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" value="<%= user.password %>" required>
+        <label for="inputName">Name</label>
+        <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" value="<%= user.name %>" required>
+        <label for="inputPhoneNumber">Phone Number</label>
+        <input type="text" name="phone" id="inputPhoneNumber" class="form-control" placeholder="Phone Number" value="<%= user.phone %>" required>
+        <br /><button class="btn btn-lg btn-primary btn-block" type="submit">저장하기</button>
+      </form>
+</div>
