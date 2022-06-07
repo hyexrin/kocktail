@@ -33,7 +33,7 @@ module.exports = {
 
   order: (req, res, next) => {
     let userId = req.params.id;
-    Cart.find({userId : {$eq : userId }})
+    Order.find({userId : {$eq : userId }})
       .then(order => {
        res.locals.order = order;
        next();

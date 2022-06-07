@@ -37,3 +37,30 @@
         <% }); %>
     </tbody>
 </table>
+
+<h2>주문 목록</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>주문 날짜</th>
+            <th>CATEGORY</th>
+            <th>CODE</th>
+            <th>NAME</th>
+            <th>PRICE</th>
+            <th>주문 상태</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% order.forEach(order => { %>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><%= order.productCode %></td>
+            <td></td>
+            <td></td>
+            <td><%= order.state %></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
