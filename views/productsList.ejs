@@ -1,0 +1,26 @@
+<div id="category">
+<h1>카테고리</h1>
+<tr>
+<td>전체보기</td>
+<td>/</td>
+<td>국</td>
+<td>/</td>
+<td>밀키트·메인요리</td>
+</tr> <br>
+
+<% products.forEach(products => { %>
+<article class="article">
+  <a href="/productsSub">     
+    <div class="menu">
+      <div class="pic">
+      <img src="img\<%= products.img %>" alt="사진" style="width: 100%;">
+      </div><br>
+      <b><%= products.name %></b> <br>
+      <%= products.price %>원
+    </div>
+  </a>
+    
+      <div class="clear"></div>
+  </article>
+  <% }); %> 
+</div>

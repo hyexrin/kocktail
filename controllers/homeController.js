@@ -15,5 +15,9 @@ module.exports = {
         next(error);
       });
     
+  },
+  
+  adminIndex: (req, res) => {
+    res.render("admin/index");
   }
 };
