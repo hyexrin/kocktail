@@ -36,6 +36,24 @@ module.exports = {
     res.render("productsInsert");
   },
 
+  productsList: (req, res) => {
+    Products.find()
+      .then(products => {
+        res.locals.products = products;
+        res.render("productsList");
+        next();
+      })
+      .catch(error => {
+        console.log(`Error fetching products: ${error.message}`);
+        next(error);
+      });
+  
+  },
+
+  productsSub: (req, res) => {
+        res.render("productsSub")
+  },
+
   create: (req, res, next) => {
     let productsParams = getProductsParams(req.body);
     productsParams.img = req.file.filename;

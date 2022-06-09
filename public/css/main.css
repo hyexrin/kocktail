@@ -87,7 +87,7 @@ header #top_menu li {
   /* background-color: lightgray; */
 }
 
-#best {
+#best, #category {
   width: 100%;
   /* height: 450px; */
   /* background-color: yellow; */
