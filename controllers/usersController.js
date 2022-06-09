@@ -8,6 +8,12 @@ const User = require("../models/user"),
       name : body.name,
       phone : body.phone
     };
+  },
+  getLoginParams = body => {
+    return {
+      nick : body.nick,
+      password : body.password
+    };
   };
 
   module.exports = {
@@ -146,6 +152,7 @@ const User = require("../models/user"),
       successRedirect: "/",
       successFlash: "Logged in!"
     }),
+
     logout: (req, res, next) => {
       req.logout();
       req.flash("success", "You have been logged out!");

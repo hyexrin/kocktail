@@ -1,5 +1,5 @@
 "use strict";
-
+const orderController = require("./orderController");
 const Products = require("../models/products"),
   getProductsParams = body => {
     return {
@@ -29,7 +29,7 @@ module.exports = {
 
   
   productsView : (req, res) => {
-    res.render("products");
+    res.render("products", orderController.getCurrentDate);
   },
 
   productsInsert: (req, res) => {

@@ -3,6 +3,10 @@ const mongoose = require("mongoose"),
 
 var orderSchema = new Schema (
     {
+        date : {
+            type:String
+        },
+
         userId : {
             type:String
         },

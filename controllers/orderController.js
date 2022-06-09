@@ -1,18 +1,28 @@
 const Order = require("../models/order"),
 getOrderParams = body => {
   return {
+    date : getCurrentDate(),
     userId : body.userId,
     productCode : body.productCode,
     state : body.state
   };
 };
 
+function getCurrentDate() {
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = date.getMonth();
+  var today = date.getDate();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  return new Date(Date.UTC(year, month, today, hours,minutes));
+}
 
 module.exports = {
   create: (req, res, next) => {
     let OrderParams = getOrderParams(req.body);
 
-    Order.create(OrderParams)
+    Order.create( OrderParams )
       .then(order => {
         res.locals.redirect = "/products";
         res.locals.order = order;
@@ -43,5 +53,6 @@ module.exports = {
         next(error);
       });
     }
+
 
 };

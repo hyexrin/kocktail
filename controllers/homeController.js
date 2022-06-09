@@ -3,7 +3,7 @@
 const Products = require("../models/products");
 
 module.exports = {
-  index: (req, res) => {
+  index: (req, res, next) => {
     Products.find().limit(4)
       .then(products => {
         res.locals.products = products;
