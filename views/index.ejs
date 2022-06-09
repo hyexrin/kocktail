@@ -9,7 +9,7 @@
       <!-- <article class="emp"></article> -->
       <% products.forEach(products => { %>
       <article class="article">
-        
+        <a href="/productsSub/<%= products.id %>">
         <div class="menu">
           <div class="pic">
             <img src="img\<%= products.img %>" alt="사진" style="width: 100%;">
@@ -17,7 +17,7 @@
           <b><%= products.name %></b> <br>
           <%= products.price %>원
         </div>
-        
+        </a>
           <div class="clear"></div>
       </article>
       <% }); %>  

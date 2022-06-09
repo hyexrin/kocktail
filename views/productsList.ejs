@@ -10,10 +10,11 @@
 
 <% products.forEach(products => { %>
 <article class="article">
-  <a href="/productsSub">     
+  <a href="/productsSub/<%= products.id %>">     
     <div class="menu">
       <div class="pic">
       <img src="img\<%= products.img %>" alt="사진" style="width: 100%;">
+      <!-- <img src="img\<%= products.img %>" alt="사진" style="width: 100%;" onclick="alert('<%= products.id %>')"> -->
       </div><br>
       <b><%= products.name %></b> <br>
       <%= products.price %>원
