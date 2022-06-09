@@ -146,12 +146,19 @@ const User = require("../models/user"),
         }
       });
     },
-    authenticate: passport.authenticate("local", {
+
+    authenticate:  passport.authenticate("local", {
       failureRedirect: "/login",
-      failureFlash: "Failed to login.",
-      successRedirect: "/",
-      successFlash: "Logged in!"
+      failureFlash: "Failed to login."
     }),
+
+    adminFilter : (req, res) => {
+      if (req.user.nick == "admin") {
+        res.redirect('/users');
+      } else {
+        res.redirect('/');
+      }
+    },
 
     logout: (req, res, next) => {
       req.logout();

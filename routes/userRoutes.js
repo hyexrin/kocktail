@@ -9,7 +9,7 @@ router.get("/join", usersController.join);
 router.post("/joined", usersController.validate, usersController.joined, usersController.redirectView);
 
 router.get("/login", usersController.login);
-router.post("/login", usersController.authenticate);
+router.post("/login", usersController.authenticate, usersController.adminFilter);
 router.get("/logout", usersController.logout, usersController.redirectView);
 
 // myPage를 장바구니 기능 겸용으로 사용
