@@ -9,7 +9,7 @@ router.get("/products", productsController.index, productsController.productsVie
 router.get("/productsInsert", productsController.productsInsert);
 router.post("/inserted", upload.single('file'), productsController.create, productsController.redirectView);
 router.get("/productsList", productsController.productsList);
-router.get("/productsSub", productsController.productsSub);
+router.get("/productsSub/:productsId", productsController.productsSub,productsController.show);
 
 // products.ejs 에서 '장바구니' 버튼 누르면 DB cart collection에 저장
 router.post("/cartInsert", cartController.create, cartController.redirectView);

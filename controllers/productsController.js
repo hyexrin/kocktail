@@ -51,7 +51,9 @@ module.exports = {
   },
 
   productsSub: (req, res) => {
-        res.render("productsSub")
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    console.log(req.params.id);
+    res.render("productsSub");
   },
 
   create: (req, res, next) => {
@@ -78,8 +80,10 @@ module.exports = {
   },
 
   show: (req, res, next) => {
-    let productsCode = req.params.code;
-    Products.findById(productsCode)
+    let productsId = req.params.id;
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    console.log(productsId);
+    Products.findById(productsId)
       .then(products => {
         res.locals.products = products;
         next();
