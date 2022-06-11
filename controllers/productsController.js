@@ -52,8 +52,19 @@ module.exports = {
 
   productsSub: (req, res) => {
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    console.log(req.params.id);
-    res.render("productsSub");
+    console.log(req.params.productsId);
+    let productsId = req.params.productsId;
+    Products.findById(productsId)
+      .then(products => {
+        res.locals.products = products;
+        res.render("productsSub");
+        next();
+      })
+      .catch(error => {
+        console.log(`Error fetching products by code: ${error.message}`);
+        next(error);
+      });
+    
   },
 
   create: (req, res, next) => {
@@ -80,7 +91,7 @@ module.exports = {
   },
 
   show: (req, res, next) => {
-    let productsId = req.params.id;
+    let productsId = req.params.productsId;
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
     console.log(productsId);
     Products.findById(productsId)
