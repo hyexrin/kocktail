@@ -1,0 +1,38 @@
+<h2 class="center">Orders Table</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>주문 날짜</th>
+      <th>주문자</th>
+      <th>품번</th>
+      <th>주문 상태</th>
+      <th>EDIT</th>
+      <th>DELETE</t>
+    </tr>
+  </thead>
+  <tbody>
+    <% order.forEach(order => { %>
+    <tr>
+      <td>
+        <%= order.date %>
+      </td>
+      <td>
+        <% let search = users.indexOf({ _id : { $eq : %> <%= order.userId %> <% }}); %>
+        <%= users[search].nick %>
+      </td>
+      <td>
+        <%= order.productCode %>
+      </td>
+      <td>
+        <%= order.state %>
+      </td>
+      <td>
+        <a href="">Edit</a>
+      </td>
+      <td>
+        <a href="" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
+      </td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>

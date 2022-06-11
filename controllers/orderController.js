@@ -1,12 +1,13 @@
 const Order = require("../models/order"),
-getOrderParams = body => {
-  return {
-    date : getCurrentDate(),
-    userId : body.userId,
-    productCode : body.productCode,
-    state : body.state
+  User = require("../models/user"),
+  getOrderParams = body => {
+    return {
+      date : getCurrentDate(),
+      userId : body.userId,
+      productCode : body.productCode,
+      state : body.state
+    };
   };
-};
 
 function getCurrentDate() {
   var date = new Date();
@@ -19,6 +20,18 @@ function getCurrentDate() {
 }
 
 module.exports = {
+
+  index: (req, res, next) => {
+    Order.find()
+      .then(order => {
+        res.locals.order = order;
+        next();
+      })
+      .catch(error => {
+        console.log(`Error fetching users: ${error.message}`);
+        next(error);
+      });
+  },
   create: (req, res, next) => {
     let OrderParams = getOrderParams(req.body);
 
@@ -52,7 +65,20 @@ module.exports = {
         console.log(`Error : ${error.message}`);
         next(error);
       });
-    }
+  },
+      
+  orderView: (req, res) => {
+    res.render("orders");
+  }
 
+  // filtering : () => {
+  //   const searchResult = [];
+  //   let index = User._id.indexOf(Order.userId);
+  //   while (index != -1) {
+  //     searchResult.push(index);
+  //     index = Order.indexOf(Order.userId, index + 1);
+  //   }
+  //   return searchResult;
+  // }
 
 };

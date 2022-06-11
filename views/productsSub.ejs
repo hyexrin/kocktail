@@ -4,3 +4,20 @@
     <div style="width: 350px; height: 450px; background-color: lightgray;">이미지1</div>
 
 </div>
+
+<div>
+  <form action ='cartInsert' method="POST">
+  <input type="hidden" name="userId" value='<%= currentUser._id %>'>
+  <input type="hidden" name="productCode" value='<%= products.code %>'>
+  <button type="submit">장바구니에 담기</button>
+  </form>
+</div>
+
+<div>
+  <form action="ordered" method="POST">
+    <input type="hidden" name="userId" value='<%= currentUser._id %>'>
+    <input type="" name="productCode" value='<%= products.code %>'>
+    <input type="hidden" name="state" value="결제 완료">
+    <button type="submit">구매하기</button>
+  </form>
+<div>
