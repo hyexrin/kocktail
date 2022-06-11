@@ -8,12 +8,6 @@ const User = require("../models/user"),
       name : body.name,
       phone : body.phone
     };
-  },
-  getLoginParams = body => {
-    return {
-      nick : body.nick,
-      password : body.password
-    };
   };
 
   module.exports = {
@@ -154,7 +148,7 @@ const User = require("../models/user"),
 
     adminFilter : (req, res) => {
       if (req.user.nick == "admin") {
-        res.redirect('/users');
+        res.redirect('/admin/index');
       } else {
         res.redirect('/');
       }

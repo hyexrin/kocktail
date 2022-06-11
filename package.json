@@ -33,5 +33,6 @@
     "url": "https://github.com/hyexrin/kocktail/issues"
   },
   "homepage": "https://github.com/hyexrin/kocktail#readme",
-  "author": ""
+  "author": "",
+  "devDependencies": {}
 }
