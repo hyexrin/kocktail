@@ -7,7 +7,6 @@
       <th>품번</th>
       <th>주문 상태</th>
       <th>EDIT</th>
-      <th>DELETE</t>
     </tr>
   </thead>
   <tbody>
@@ -17,8 +16,7 @@
         <%= order.date %>
       </td>
       <td>
-        <% let search = users.indexOf({ _id : { $eq : %> <%= order.userId %> <% }}); %>
-        <%= users[search].nick %>
+        <%= order.userId %>
       </td>
       <td>
         <%= order.productCode %>
@@ -27,10 +25,7 @@
         <%= order.state %>
       </td>
       <td>
-        <a href="">Edit</a>
-      </td>
-      <td>
-        <a href="" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
+        <a href="<%=`/admin/${order._id}/edit`%>">Edit</a>
       </td>
     </tr>
     <% }); %>

@@ -19,6 +19,10 @@ router.post("/productsSub/ordered", orderController.create, orderController.redi
 
 // admin 페이지에서 주문 목록 조회하기
 router.get("/orders", orderController.index, usersController.index, orderController.orderView);
+// admin 페이지 주문 목록 수정하기
+ router.get("/admin/:orderId/edit", orderController.edit);
+ router.put("/admin/:orderId/update", orderController.update, orderController.redirectView);
+
 
 module.exports = router;
 

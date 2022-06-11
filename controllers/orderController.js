@@ -1,5 +1,6 @@
 const Order = require("../models/order"),
   User = require("../models/user"),
+  mongoose = require("mongoose"),
   getOrderParams = body => {
     return {
       date : getCurrentDate(),
@@ -68,17 +69,45 @@ module.exports = {
   },
       
   orderView: (req, res) => {
-    res.render("orders");
-  }
+    res.render("admin/orders");
+  },
 
-  // filtering : () => {
-  //   const searchResult = [];
-  //   let index = User._id.indexOf(Order.userId);
-  //   while (index != -1) {
-  //     searchResult.push(index);
-  //     index = Order.indexOf(Order.userId, index + 1);
-  //   }
-  //   return searchResult;
-  // }
+  edit: (req, res, next) => {
+    let OrderId = req.params.orderId;
+    Order.findById(OrderId)
+      .then(order => {
+        res.render("admin/edit", {
+          order : order
+        });
+      })
+      .catch(error => {
+        console.log(`Error fetching user by ID: ${error.message}`);
+        next(error);
+      });
+  },
+
+  update: (req, res, next) => {
+    let OrderId = req.params.orderId
+    orderParams = getOrderParams(req.body);
+
+    Order.findByIdAndUpdate(OrderId, {
+    $set: orderParams
+   })
+    .then(order => {
+      res.locals.redirect = "/orders";
+      res.locals.order = order;
+      next();
+    })
+    .catch(error => {
+      console.log(`Error updating user by ID: ${error.message}`);
+      next(error);
+    });
+  },
+
+  redirectView: (req, res, next) => {
+    let redirectPath = res.locals.redirect;
+    if (redirectPath !== undefined) res.redirect(redirectPath);
+    else next();
+  }
 
 };

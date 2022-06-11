@@ -27,7 +27,6 @@ module.exports = {
       });
   },
 
-  
   productsView : (req, res) => {
     res.render("products", orderController.getCurrentDate);
   },

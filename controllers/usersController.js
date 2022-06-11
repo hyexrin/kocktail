@@ -23,7 +23,7 @@ const User = require("../models/user"),
         });
     },
     userView: (req, res) => {
-      res.render("users");
+      res.render("admin/users");
     },
   
     join: (req, res) => {
