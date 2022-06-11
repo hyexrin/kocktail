@@ -50,7 +50,7 @@ module.exports = {
   
   },
 
-  productsSub: (req, res) => {
+  productsSub: (req, res, next) => {
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
     console.log(req.params.productsId);
     let productsId = req.params.productsId;

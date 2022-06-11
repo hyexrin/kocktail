@@ -19,7 +19,7 @@
 <div>
   <form action="ordered" method="POST">
     <input type="hidden" name="userId" value='<%= currentUser._id %>'>
-    <input type="" name="productCode" value='<%= products.code %>'>
+    <input type="hidden" name="productCode" value='<%= products.code %>'>
     <input type="hidden" name="state" value="결제 완료">
     <button type="submit">구매하기</button>
   </form>
