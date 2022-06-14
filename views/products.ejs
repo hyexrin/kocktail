@@ -1,32 +1,40 @@
-<h2 class="center">Products Table</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th>CATEGORY</th>
-      <th>NAME</th>
-      <th>PRICE</th>
-      <th>IMG</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% products.forEach(products => { %>
-    <tr>
-      <td>
-          <%= products.category %>
-      </td>
-      <td>
-        <%= products.name %>
-      </td>
-      <td>
-        <%= products.price %>
-      </td>
-      <td>
-        <img src="img\<%= products.img %>" alt="사진" style="width: 100px;">      
-      </td>
-
-    </tr>
-    <% }); %>
-  </tbody>
-</table>
-
-<button onclick="location.href = '/productsInsert'">add</button>
+<div id="products">
+  <h2 class="center">Products List</h2>
+  <h3> <a href="/productsInsert"  style="background-color: darkgray; color: white;"> [Products Add] </a> </h3>
+  
+  <table id="productsTable" width="1000px">
+    <thead>
+      <tr>
+        <th>CATEGORY</th>
+        <th>NAME</th>
+        <th>PRICE</th>
+        <th>IMG</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.forEach(products => { %>
+      <tr>
+        <td>
+            <%= products.category %>
+        </td>
+        <td>
+          <%= products.name %>
+        </td>
+        <td>
+          <%= products.price %>원
+        </td>
+        <td>
+          <img src="img\<%= products.img %>" alt="사진" style="width: 100px;">      
+        </td>
+        <td>
+          <a href="<%=`/products/${products._id}/edit`%>">[Edit]</a>
+        </td>
+        <td>
+          <a href="<%=`/products/${products._id}/delete?_method=DELETE` %>" onclick="return confirm(' [<%= products.name %>] 상품을 삭제하시겠습니까? ')" a>[Delete]</a>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  
+</div>

@@ -1,26 +1,36 @@
-<h1> 서브페이지 </h1>
+<div id="sub">
 
-<div>
-    <img src="\img\<%= products.img %>" alt="<%= products.img %>" style="width: 20%;"> <br>
-    <%= products.name %> <br>
-    <%= products.price %>원
-    
+  <table id="subTable">
+    <tr height="100px">
+       <td rowspan="3"> <img src="\img\<%= products.img %>" alt="<%= products.img %>" style="width: 90%;"> </td>
+       <td width = "390px"><span style="font-size: 20px;"><b><%= products.name %></b> </span><br>
+        <%= products.discription %></td>    
+    </tr>
+    <tr height="100px">
+      <td><span style="font-size: 35px;"><%= products.price %>원</span></td>
+    </tr>
+
+    <tr>
+      <td>
+        <div>
+        <form action ='cartInsert' method="POST">
+        <input type="hidden" name="userId" value='<%= currentUser._id %>'>
+        <input type="hidden" name="productCode" value='<%= products.code %>'>
+        <button type="submit">장바구니에 담기</button>
+        </form>
+        </div>
+
+        <div>
+          <form action="ordered" method="POST">
+            <input type="hidden" name="userId" value='<%= currentUser._id %>'>
+            <input type="hidden" name="productCode" value='<%= products.code %>'>
+            <input type="hidden" name="state" value="결제 완료">
+            <button type="submit">구매하기</button>
+          </form>
+        </div>
+
+     </td>
+    </tr>
+  </table>
 
 </div>
-
-<div>
-  <form action ='cartInsert' method="POST">
-  <input type="hidden" name="userId" value='<%= currentUser._id %>'>
-  <input type="hidden" name="productCode" value='<%= products.code %>'>
-  <button type="submit">장바구니에 담기</button>
-  </form>
-</div>
-
-<div>
-  <form action="ordered" method="POST">
-    <input type="hidden" name="userId" value='<%= currentUser._id %>'>
-    <input type="hidden" name="productCode" value='<%= products.code %>'>
-    <input type="hidden" name="state" value="결제 완료">
-    <button type="submit">구매하기</button>
-  </form>
-<div>

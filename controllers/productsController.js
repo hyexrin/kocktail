@@ -69,6 +69,8 @@ module.exports = {
   create: (req, res, next) => {
     let productsParams = getProductsParams(req.body);
     productsParams.img = req.file.filename;
+    console.log("#@#@#@#@#@#@#@##@#@#@#@#@##@#@");
+    console.log(productsParams);
     console.log(productsParams.img);
     Products.create(productsParams)
       .then(products => {
@@ -105,8 +107,8 @@ module.exports = {
   },
 
   edit: (req, res, next) => {
-    let productsCode = req.params.code;
-    User.findById(productsCode)
+    let productsId = req.params.productsId;
+    Products.findById(productsId)
       .then(products => {
         res.render("products/edit", {
           products: products
@@ -119,14 +121,16 @@ module.exports = {
   },
 
   update: (req, res, next) => {
-    let productsCode = req.params.code,
+    let productsId = req.params.productsId,
       productsParams = getProductsParams(req.body);
-
-    Products.findByIdAndUpdate(productsCode, {
+    console.log("@@@@@@@@@@@@@@@@@@2#######@@@@@@@@@@@@@@@@@@@");
+    console.log(productsParams);
+    console.log(productsId);
+    Products.findByIdAndUpdate(productsId, {
       $set: productsParams
     })
       .then(products => {
-        res.locals.redirect = `/products/${productsCode}`;
+        res.locals.redirect = "/products";
         res.locals.products = products;
         next();
       })
@@ -137,8 +141,8 @@ module.exports = {
   },
 
   delete: (req, res, next) => {
-    let productsCode = req.params.code;
-    Products.findByIdAndRemove(productsCode)
+    let productsId = req.params.productsId;
+    Products.findByIdAndRemove(productsId)
       .then(() => {
         res.locals.redirect = "/products";
         next();

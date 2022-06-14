@@ -20,7 +20,7 @@ var productsSchema = new Schema(
     },
     price : {
         type : String,
-        unique : true
+        required : true     
     },
     discription : {
         type : String,
@@ -30,10 +30,6 @@ var productsSchema = new Schema(
       type : String,
       data : Buffer
     }
-    // path : {
-    //   type : String,
-    //   unique : true
-    // }
   },
   {
     timestamps: true

@@ -1,0 +1,17 @@
+<div class="data-form">
+    <form class="form-signin" method="POST" action="<%=`/products/${products._id}/update?_method=PUT`%>">
+      <h2 class="form-signin-heading"><%= products.name%> 상품 정보 수정</h2>
+      <label for="inputCategory">CATEGORY</label>
+      <input type="text" name="category" id="inputCategory" class="form-control" value="<%= products.category %>" placeholder="Category" autofocus>
+      <label for="inputCode">CODE</label>
+      <input type="text" name="code" id="inputcode" class="form-control" value="<%= products.code %>" placeholder="Code" required>
+      <label for="inputName">Name</label>
+      <input type="text" name="name" id="inputName" class="form-control" value="<%= products.name %>" placeholder="Name" required>
+      <label for="inputPrice">PRICE</label>
+      <input type="text" name="price" id="inputPrice" class="form-control" value="<%= products.price %>" placeholder="Price" required>
+      <label for="inputDiscription">DISCRIPTION</label>
+      <input type="text" name="discription" id="inputDiscription" class="form-control" value="<%= products.discription %>" placeholder="Discription" required>
+      <br /><button class="btn btn-lg btn-primary btn-block" type="submit">edit</button>
+    </form>
+  </div>
+  

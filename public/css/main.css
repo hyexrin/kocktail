@@ -113,6 +113,27 @@ header #top_menu li {
   text-align: left;
 }
 
+#products {
+  text-align: center;
+}
+
+#productsTable {
+  margin: 0 auto;
+}
+
+#sub {
+  margin: 3% 20% 5% 10%;
+  /* background-color: red; */
+}
+
+#subTable {
+  margin: 0 auto;
+}
+
+#subTable > th, td  {
+  vertical-align: top;
+}
+
 footer {
   clear: both;
   width: 100%;

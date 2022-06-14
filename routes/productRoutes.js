@@ -11,6 +11,9 @@ router.get("/productsInsert", productsController.productsInsert);
 router.post("/inserted", upload.single('file'), productsController.create, productsController.redirectView);
 router.get("/productsList", productsController.productsList);
 router.get("/productsSub/:productsId", productsController.productsSub);
+router.get("/products/:productsId/edit", productsController.edit);
+router.put("/products/:productsId/update", productsController.update, productsController.redirectView);
+router.delete("/products/:productsId/delete", productsController.delete, productsController.redirectView);
 
 // products.ejs 에서 '장바구니' 버튼 누르면 DB cart collection에 저장
 router.post("/productsSub/cartInsert", cartController.create, cartController.redirectView);
