@@ -5,8 +5,9 @@
       <li> <a href="/"><img src="/img/logo.png" alt="로고" style="width: 5%; margin-top: 5px;"></a> </li>
       <li> <a href="/productsList">SHOP</a> </li>
       <% if (loggedIn) { %>
-        <li><a href="<%=`/users/${currentUser._id}`%>">
-        <%= currentUser.name %></a></li>
+          <li>
+            <a href="<%=`/users/${currentUser._id}`%>"><%= currentUser.name %></a>
+          </li> 
         <li><a href="/logout"> LOGOUT </a></li>
         <%} else {%>
         <li> <a href="/login"> LOGIN </a></li>
