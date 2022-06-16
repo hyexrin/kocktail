@@ -2,9 +2,17 @@
     alert("관리자 메인 페이지");
 </script>
 <body>
+
+    <h1 style="text-align: center; margin-top: 3%;">관리자님 환영합니다.</h1>
+
     <div style="text-align: center; margin: 200px;">
-        <button onclick="location.href = '/users'">users</button>
-        <button onclick="location.href = '/products'">products</button>
-        <button onclick="location.href = '/orders'">orders</button>
+        <h4>회원 관리</h4>
+        <button class="btnAdmin" onclick="location.href = '/users'">users</button>
+
+        <h4>상품 관리</h4>
+        <button class="btnAdmin" onclick="location.href = '/products'">products</button>
+
+        <h4>주문 관리</h4>
+        <button class="btnAdmin" onclick="location.href = '/orders'">orders</button>
     </div>
 </body>
