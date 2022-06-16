@@ -154,3 +154,46 @@ footer {
   background-color: #ff9c31;
   color: white;
 }
+
+#btnUser {
+  display: block;
+  width: 40%;
+  height: 30px;
+  border: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #ff9c31;
+  color: white;
+}
+
+#loginLabel {
+  display: block;
+  width: 40%;
+  height: 30px;
+  border: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-radius: 10px;
+}
+
+#loginForm {
+  display: block;
+  width: 40%;
+  height: 30px;
+  border: 1px solid #ff9c31;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-radius: 10px;
+}
+
+#errorImg {
+  height : 60%;
+  width : 60%;
+  display: block;
+  text-align: center;
+}

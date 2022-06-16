@@ -60,7 +60,7 @@ const User = require("../models/user"),
           next();
         })
         .catch(error => {
-          console.log(`Error fetching user by ID: ${error.message}`);
+          console.log(` ${error.message}`);
           next(error);
         });
     },

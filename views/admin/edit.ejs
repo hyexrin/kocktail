@@ -1,14 +1,14 @@
 <div class="data-form">
     <form class="form-order-edit" method="POST" action="<%=`/admin/${order._id}/update?_method=PUT`%>">
-        <h2 class="form-order-edit-heading">주문정보 수정</h2>
-        <label for="inputDate">주문 날짜</label>
-        <input type="text" name="date" id="inputData" class="form-control" placeholder="date" value="<%= order.date %>" autofocus>
-        <label for="inputUserId">주문자</label>
-        <input type="text" name="userId" id="inputUserId" class="form-control" placeholder="userId" value="<%= order.userId %>" required>
-        <label for="inputProductCode">품번</label>
-        <input type="text" name="productCode" id="inputProductCode" class="form-control" placeholder="productCode" value="<%= order.productCode %>" required>
-        <label for="inputState">주문 상태</label>
-        <select name="state">
+        <h2 class="form-order-edit-heading" style="text-align: center; margin-top: 3%;">주문정보 수정</h2>
+        <label id="loginLabel" for="inputDate">주문 날짜</label>
+        <input id="loginForm" type="text" name="date" id="inputData" class="form-control" placeholder="date" value="<%= order.date %>" autofocus>
+        <label id="loginLabel" for="inputUserId">주문자</label>
+        <input id="loginForm" type="text" name="userId" id="inputUserId" class="form-control" placeholder="userId" value="<%= order.userId %>" required>
+        <label id="loginLabel" for="inputProductCode">품번</label>
+        <input id="loginForm" type="text" name="productCode" id="inputProductCode" class="form-control" placeholder="productCode" value="<%= order.productCode %>" required>
+        <label id="loginLabel" for="inputState">주문 상태</label>
+        <select id="loginForm" name="state">
           <option value="<%= order.state %>"><%= order.state %></option>
           <option value="결제 완료">결제 완료</option>
           <option value="상품 준비중">상품 준비중</option>
@@ -16,6 +16,7 @@
           <option value="배송 완료">배송 완료</option>
           <option value="주문 취소">주문 취소</option>
         </select>
-        <br /><button class="btn btn-lg btn-primary btn-block" type="submit">저장하기</button>
+        <br>
+        <button id="btnUser" class="btn btn-lg btn-primary btn-block" type="submit">저장하기</button>
       </form>
 </div>

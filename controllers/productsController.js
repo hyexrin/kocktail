@@ -35,7 +35,7 @@ module.exports = {
     res.render("productsInsert");
   },
 
-  productsList: (req, res) => {
+  productsList: (req, res, next) => {
     Products.find()
       .then(products => {
         res.locals.products = products;
