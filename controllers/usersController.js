@@ -67,7 +67,7 @@ const User = require("../models/user"),
   
     myPageView: (req, res) => {
       let userId = req.params.id;
-      if (userId == "62a0d99f3add581954567832" ){
+      if (userId == "62aaf56a51b61d57a279d0a7" ){
         res.render("admin/index");
       } else {
       res.render("users/myPage" );

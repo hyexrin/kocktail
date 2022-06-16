@@ -1,3 +1,13 @@
+<script>
+  function btn1(){
+    alert('장바구니에 담겼습니다.');
+  }
+
+  function btn2() {
+    alert('주문되었습니다.');
+  }
+</script>
+
 <div id="sub">
 
   <table id="subTable">
@@ -16,7 +26,7 @@
         <form action ='cartInsert' method="POST">
         <input type="hidden" name="userId" value='<%= currentUser._id %>'>
         <input type="hidden" name="productCode" value='<%= products.code %>'>
-        <button type="submit">장바구니에 담기</button>
+        <button type="submit" onclick="javascript:btn1()">장바구니에 담기</button>
         </form>
         </div>
 
@@ -25,7 +35,7 @@
             <input type="hidden" name="userId" value='<%= currentUser._id %>'>
             <input type="hidden" name="productCode" value='<%= products.code %>'>
             <input type="hidden" name="state" value="결제 완료">
-            <button type="submit">구매하기</button>
+            <button type="submit" onclick="javascript:btn2()">구매하기</button>
           </form>
         </div>
 

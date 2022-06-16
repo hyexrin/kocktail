@@ -20,19 +20,13 @@
 <table>
     <thead>
         <tr>
-            <th>CATEGORY</th>
             <th>CODE</th>
-            <th>NAME</th>
-            <th>PRICE</th>
         </tr>
     </thead>
     <tbody>
         <% carts.forEach(carts => { %>
         <tr>
-            <td></td>
             <td><%= carts.productCode %></td>
-            <td></td>
-            <td></td>
         </tr>
         <% }); %>
     </tbody>
@@ -44,10 +38,7 @@
     <thead>
         <tr>
             <th>주문 날짜</th>
-            <th>CATEGORY</th>
             <th>CODE</th>
-            <th>NAME</th>
-            <th>PRICE</th>
             <th>주문 상태</th>
         </tr>
     </thead>
@@ -55,10 +46,7 @@
         <% order.forEach(order => { %>
         <tr>
             <td><%= order.date %></td>
-            <td></td>
             <td><%= order.productCode %></td>
-            <td></td>
-            <td></td>
             <td><%= order.state %></td>
         </tr>
         <% }); %>
