@@ -197,3 +197,36 @@ footer {
   display: block;
   text-align: center;
 }
+
+.form-control {
+  display: block;
+  width: 40%;
+  height: 30px;
+  border: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.productsLabel {
+  display: block;
+  width: 40%;
+  height: 30px;
+  border: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.productsInsertform {
+  display: block;
+  width: 40%;
+  height: 30px;
+  border: 1px solid #ff9c31;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-radius: 10px;
+}
