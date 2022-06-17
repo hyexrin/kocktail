@@ -1,6 +1,7 @@
 const mongoose = require("mongoose"),
   { Schema } = require("mongoose");
 
+// orders mongoDB에 저장될 schema 형식 지정
 var orderSchema = new Schema (
     {
         date : {
@@ -21,4 +22,5 @@ var orderSchema = new Schema (
     }
 );
 
+// orders 모델 exports
 module.exports = mongoose.model("Order", orderSchema);

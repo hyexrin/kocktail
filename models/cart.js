@@ -1,6 +1,7 @@
 const mongoose = require("mongoose"),
   { Schema } = require("mongoose");
 
+// carts mongoDB에 저장될 schema 형식 지정
 var cartSchema = new Schema (
     {
         userId : {
@@ -14,4 +15,5 @@ var cartSchema = new Schema (
     }
 );
 
+// carts 모델 exports
 module.exports = mongoose.model("Cart", cartSchema);

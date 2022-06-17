@@ -10,7 +10,6 @@ const express = require("express"),
   expressSession = require("express-session"),
   expressValidator = require("express-validator"),
   connectFlash = require("connect-flash"),
-  fs = require("fs"),
   User = require("./models/user");
 
 mongoose.connect(
@@ -65,7 +64,6 @@ app.use((req, res, next) => {
 app.use("/", router);
 
 const server = app.listen(app.get("port"), () => {
-    console.log(`Server running at http://localhost:${app.get("port")}`);
-  }),
-  io = require("socket.io")(server);
+  console.log(`Server running at http://localhost:${app.get("port")}`);
+});
 

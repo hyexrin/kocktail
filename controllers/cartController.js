@@ -8,6 +8,8 @@ getCartParams = body => {
 
 
 module.exports = {
+
+  //cart collection에 데이터 저장 및 products.ejs로 redirect
   create: (req, res, next) => {
     let CartParams = getCartParams(req.body);
 
@@ -23,13 +25,14 @@ module.exports = {
       });
   },
 
+  // redirect할 페이지를 받아와 redirect 하는 함수
   redirectView: (req, res, next) => {
     let redirectPath = res.locals.redirect;
     if (redirectPath !== undefined) res.redirect(redirectPath);
     else next();
   },
 
-
+  // 현재 로그인 된 id에 해당되는 cart목록을 cart에서 find()
   cart: (req, res, next) => {
     let userId = req.params.id;
     Cart.find({userId : {$eq : userId }})

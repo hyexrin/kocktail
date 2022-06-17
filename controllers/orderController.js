@@ -1,6 +1,6 @@
+//orderController
+
 const Order = require("../models/order"),
-  User = require("../models/user"),
-  mongoose = require("mongoose"),
   getOrderParams = body => {
     return {
       date : getCurrentDate(),
@@ -10,6 +10,7 @@ const Order = require("../models/order"),
     };
   };
 
+  // order collection의 date documents에 현시간을 저장하기 위한 함수
 function getCurrentDate() {
   var date = new Date();
   var year = date.getFullYear();
@@ -22,6 +23,7 @@ function getCurrentDate() {
 
 module.exports = {
 
+    // orders 값 find()해서 불러오기
   index: (req, res, next) => {
     Order.find()
       .then(order => {
@@ -33,6 +35,8 @@ module.exports = {
         next(error);
       });
   },
+
+  //order collection에 데이터 저장 및 products.ejs로 redirect
   create: (req, res, next) => {
     let OrderParams = getOrderParams(req.body);
 
@@ -48,13 +52,14 @@ module.exports = {
       });
   },
 
+  // redirect할 페이지를 받아와 redirect 하는 함수
   redirectView: (req, res, next) => {
     let redirectPath = res.locals.redirect;
     if (redirectPath !== undefined) res.redirect(redirectPath);
     else next();
   },
 
-
+  // 현재 로그인 된 id에 해당되는 order목록을 orders에서 find()
   order: (req, res, next) => {
     let userId = req.params.id;
     Order.find({userId : {$eq : userId }})
@@ -68,10 +73,12 @@ module.exports = {
       });
   },
       
+  // admin이 order collection의 데이터를 확인할 수 있도록 /admin/orders.ejs로 render
   orderView: (req, res) => {
     res.render("admin/orders");
   },
 
+  // admin 이 order 정보를 수정하기 위한 함수
   edit: (req, res, next) => {
     let OrderId = req.params.orderId;
     Order.findById(OrderId)
@@ -86,6 +93,7 @@ module.exports = {
       });
   },
 
+  // admin이 edit에서 주문 정보를 수정한 것을 저장하기 위한 함수
   update: (req, res, next) => {
     let OrderId = req.params.orderId
     orderParams = getOrderParams(req.body);
@@ -102,12 +110,6 @@ module.exports = {
       console.log(`Error updating user by ID: ${error.message}`);
       next(error);
     });
-  },
-
-  redirectView: (req, res, next) => {
-    let redirectPath = res.locals.redirect;
-    if (redirectPath !== undefined) res.redirect(redirectPath);
-    else next();
   }
 
 };
