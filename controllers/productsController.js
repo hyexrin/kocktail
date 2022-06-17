@@ -1,6 +1,9 @@
 "use strict";
+
+// orderController와 products 모델 불러오기
 const orderController = require("./orderController");
 const Products = require("../models/products"),
+  // products 모델 
   getProductsParams = body => {
     return {
       category : body.category,
@@ -12,9 +15,10 @@ const Products = require("../models/products"),
     };
   };
 
-
+// productsController.js 내용을 모듈로 exports
 module.exports = {
     
+  // products 값 find()해서 불러오기
   index: (req, res, next) => {
     Products.find()
       .then(products => {
@@ -31,10 +35,12 @@ module.exports = {
     res.render("products", orderController.getCurrentDate);
   },
 
+  // productsInsert 호출 시 서버 화면에 productsInserts.ejs 출력
   productsInsert: (req, res) => {
     res.render("productsInsert");
   },
 
+  // productsList 호출 시 products 값 find()해서 불러오고 productsList.ejs에 상품 목록 전달
   productsList: (req, res, next) => {
     Products.find()
       .then(products => {
@@ -49,9 +55,8 @@ module.exports = {
   
   },
 
+  // productsSub 호출 시 전달 받은 productsId를 이용해 해당 값 productsSub에 전달 후 productsSub.ejs 출력
   productsSub: (req, res, next) => {
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    console.log(req.params.productsId);
     let productsId = req.params.productsId;
     Products.findById(productsId)
       .then(products => {
@@ -66,12 +71,10 @@ module.exports = {
     
   },
 
+  // create 호출 시 상품 정보 db에 저장 할 수 있도록 값 전달, img 파일의 경우 전달받은 파일의 파일명 값 전달
   create: (req, res, next) => {
     let productsParams = getProductsParams(req.body);
     productsParams.img = req.file.filename;
-    console.log("#@#@#@#@#@#@#@##@#@#@#@#@##@#@");
-    console.log(productsParams);
-    console.log(productsParams.img);
     Products.create(productsParams)
       .then(products => {
         res.locals.redirect = "/products";
@@ -91,10 +94,9 @@ module.exports = {
     else next();
   },
 
+  // show 호출 시 전달 받은 productsId를 이용해 해당 값 전달 후 findById로 해당 값 받아오기
   show: (req, res, next) => {
     let productsId = req.params.productsId;
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    console.log(productsId);
     Products.findById(productsId)
       .then(products => {
         res.locals.products = products;
@@ -106,6 +108,7 @@ module.exports = {
       });
   },
 
+  // edit 호출 시 전달 받은 productsId를 이용해 찾은 상품 정보 edit 할 수 있는 products/edit.ejs 출력
   edit: (req, res, next) => {
     let productsId = req.params.productsId;
     Products.findById(productsId)
@@ -120,12 +123,10 @@ module.exports = {
       });
   },
 
+  // update 호출 시 전달 받은 productsId를 이용해 찾은 상품의 정보 update
   update: (req, res, next) => {
     let productsId = req.params.productsId,
       productsParams = getProductsParams(req.body);
-    console.log("@@@@@@@@@@@@@@@@@@2#######@@@@@@@@@@@@@@@@@@@");
-    console.log(productsParams);
-    console.log(productsId);
     Products.findByIdAndUpdate(productsId, {
       $set: productsParams
     })
@@ -140,6 +141,7 @@ module.exports = {
       });
   },
 
+  // delete 호출 시 전달 받은 productsId를 이용해 해당 상품의 정보 delete
   delete: (req, res, next) => {
     let productsId = req.params.productsId;
     Products.findByIdAndRemove(productsId)

@@ -1,8 +1,10 @@
 "use strict";
-
+// mongoose 기능 사용
 const mongoose = require("mongoose"),
   { Schema } = require("mongoose");
 
+
+// products mongoDB에 저장될 schema 형식 지정
 var productsSchema = new Schema(
   {
     category : {
@@ -36,6 +38,7 @@ var productsSchema = new Schema(
   }
 );
 
+// Products 모델 exports
 
 productsSchema.pre("save", function(next) {
   let product = this;

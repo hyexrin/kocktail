@@ -6,11 +6,20 @@ const router = require("express").Router(),
   multer = require('multer'); 
   let  upload = multer({ dest : './public/img/'});
 
+// products.ejs 에서 DB products에 있는 상품 리스트 출력
 router.get("/products", productsController.index, productsController.productsView);
+
+// productsInsert.ejs 에서 'products add' 누르면 DB products collection에 저장
 router.get("/productsInsert", productsController.productsInsert);
 router.post("/inserted", upload.single('file'), productsController.create, productsController.redirectView);
+
+// header에 shop 카테고리 클릭 시 productsList.ejs 화면으로 이동
 router.get("/productsList", productsController.productsList);
+
+// 상품을 클릭하면 해당 상품의 값을 productsSub.ejs로 전달하고 해당 상품의 DB 정보 화면 출력
 router.get("/productsSub/:productsId", productsController.productsSub);
+
+// DB products collection 정보 수정, 삭제 기능
 router.get("/products/:productsId/edit", productsController.edit);
 router.put("/products/:productsId/update", productsController.update, productsController.redirectView);
 router.delete("/products/:productsId/delete", productsController.delete, productsController.redirectView);
