@@ -4,3 +4,4 @@
 ***
 #### Front : EJS
 #### Back : Node.js
+#### DB : MongoDB
